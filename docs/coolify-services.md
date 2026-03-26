@@ -1,1 +1,39 @@
-IyBDb29saWZ5IFNlcnZpY2VzIOKAlCBZQUlPCgojIyBBY2Nlc28KCi0gVVJMOiBjb25maWd1cmFkbyBlbiBDb29saWZ5IChsb2NhbGhvc3Qgc2VsZi1ob3N0ZWQpCi0gQ0xJOiBgY29vbGlmeWAgZGlzcG9uaWJsZSBlbiBlbCBzZXJ2aWRvcgotIE1DUDogY29uZmlndXJhZG8gY29tbyBgbWNwX19jb29saWZ5X18qYCBlbiBDbGF1ZGUgQ29kZQoKIyMgU2VydmljaW9zIGFjdGl2b3MKCiMjIyBQcm9kdWN0aW9uIChlbnZfaWQ6IDQpCgp8IE5vbWJyZSB8IFVVSUQgfCBFc3RhZG8gfAp8LS0tLS0tLS18LS0tLS0tfC0tLS0tLS0tfAp8IG5leHRjbG91ZCB8IGs4NHNnZ3d3czRzbzhzczAwd2t3Yzg0OCB8IHJ1bm5pbmc6aGVhbHRoeSB8CnwgbmV4dGNsb3VkLXdpdGgtcG9zdGdyZXMgfCB1czhrbzRvOHd3d29rdzB3dzRzc29vMGcgfCBydW5uaW5nOmhlYWx0aHkgfAp8IGF1dGhlbnRpayB8IG9jODhjZzBrazRjYzhvMGM4OGdnbzRnMCB8IHJ1bm5pbmc6aGVhbHRoeSB8CnwgaW5maXNpY2FsIHwgaTg0ZzRnazRnb3NrOGs4ODQ0Z280OHcwIHwgcnVubmluZzpoZWFsdGh5IHwKCiMjIyBEZXZlbG9wbWVudCAoZW52X2lkOiA2KQoKfCBOb21icmUgfCBVVUlEIHwgRXN0YWRvIHwKfC0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLXwKfCByY2xvbmUtb25lZHJpdmUtczMgfCBtc2tjY2c4NG93czBvY2d3dzRjMDQ0a2cgfCBydW5uaW5nOmhlYWx0aHkgfAp8IGNocm9tYWRiIHwgZ2dvNGtjMDQ0OHdzYzhjc293a2cwbzRvIHwgcnVubmluZzp1bmtub3duIHwKCiMjIyBNb25pdG9yaW5nIChlbnZfaWQ6IDEwKQoKfCBOb21icmUgfCBVVUlEIHwgRXN0YWRvIHwKfC0tLS0tLS0tfC0tLS0tLXwtLS0tLS0tLXwKfCBncmFmYW5hLW1vbml0b3JpbmcgfCBsZ28wb2dvbzR3Z2M0NDRzZ3N3Z2Nvd28gfCBydW5uaW5nOmhlYWx0aHkgfAp8IGxva2ktbW9uaXRvcmluZyB8IGg4OGNrbzA0Z2tnMDRrOHdzc2dvYzh3cyB8IHJ1bm5pbmc6dW5rbm93biB8CgojIyBTZXJ2ZXIKCi0gTm9tYnJlOiBsb2NhbGhvc3QKLSBVVUlEOiBgcmMwczQwa3NjZzRrY2tvbzRvd3djbzA4YAotIElQOiBob3N0LmRvY2tlci5pbnRlcm5hbCAoQ29vbGlmeSBob3N0KQotIFByb3h5OiBUcmFlZmlrIHYzLjYuOAo=
+# Coolify Services — YAIO
+
+## Acceso
+
+- URL: configurado en Coolify (localhost self-hosted)
+- CLI: `coolify` disponible en el servidor
+- MCP: configurado como `mcp__coolify__*` en Claude Code
+
+## Servicios activos
+
+### Production (env_id: 4)
+
+| Nombre | UUID | Estado |
+|--------|------|--------|
+| nextcloud | k84sggwws4so8ss00wkwc848 | running:healthy |
+| nextcloud-with-postgres | us8ko4o8wwwokw0ww4ssoo0g | running:healthy |
+| authentik | oc88cg0kk4cc8o0c88ggo4g0 | running:healthy |
+| infisical | i84g4gk4gosk8k8844go48w0 | running:healthy |
+
+### Development (env_id: 6)
+
+| Nombre | UUID | Estado |
+|--------|------|--------|
+| rclone-onedrive-s3 | mskccg84ows0ocgww4c044kg | running:healthy |
+| chromadb | ggo4kc0448wsc8csowkg0o4o | running:unknown |
+
+### Monitoring (env_id: 10)
+
+| Nombre | UUID | Estado |
+|--------|------|--------|
+| grafana-monitoring | lgo0ogoo4wgc444sgswgcowo | running:healthy |
+| loki-monitoring | h88cko04gkg04k8wssgoc8ws | running:unknown |
+
+## Server
+
+- Nombre: localhost
+- UUID: `rc0s40kscg4kckoo4owwco08`
+- IP: host.docker.internal (Coolify host)
+- Proxy: Traefik v3.6.8

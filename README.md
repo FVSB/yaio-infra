@@ -1,1 +1,24 @@
-IyBZQUlPIEluZnJhc3RydWN0dXJlCgpQbGF5Ym9va3MsIHNraWxscyB5IGRvY3VtZW50YWNpw7NuIG9wZXJhY2lvbmFsIGRlbCBzdGFjayBZQUlPLgoKIyMgRXN0cnVjdHVyYQoKYGBgCnNraWxscy8gICAgICAgICAg4oaSIFNraWxscyBwYXJhIENsYXVkZSBDb2RlICh+Ly5jbGF1ZGUvc2tpbGxzLykKZG9jcy8gICAgICAgICAgICDihpIgRG9jdW1lbnRhY2nDs24gZGUgc2VydmljaW9zIHkgcnVuYm9va3MKYGBgCgojIyBTZXJ2aWNpb3MKCnwgU2VydmljaW8gfCBVUkwgfCBFc3RhZG8gfAp8LS0tLS0tLS0tLXwtLS0tLXwtLS0tLS0tLXwKfCBDb29saWZ5IHwgaHR0cHM6Ly9jb29saWZ5LnlhaW90ZWNoLmNvbSB8IHByb2R1Y3Rpb24gfAp8IE5leHRjbG91ZCB8IGh0dHBzOi8vY2xvdWQueWFpb3RlY2guY29tIHwgcHJvZHVjdGlvbiB8CnwgQXV0aGVudGlrIHwgaHR0cHM6Ly9hdXRoLnlhaW90ZWNoLmNvbSB8IHByb2R1Y3Rpb24gfAp8IEluZmlzaWNhbCB8IGh0dHBzOi8vc2VjcmV0cy55YWlvdGVjaC5jb20gfCBwcm9kdWN0aW9uIHwKfCBPbmVEcml2ZSBTMyB8IGh0dHA6Ly8xMC4wLjExLjI6OTAwMCB8IGRldmVsb3BtZW50IHwKCiMjIFNraWxscyBkaXNwb25pYmxlcwoKLSBgcmNsb25lLW9uZWRyaXZlLXMzYCDigJQgUmVjb25lY3RhciBPbmVEcml2ZSB5IGFjdHVhbGl6YXIgZWwgc2VydmljaW8gUzMgZW4gQ29vbGlmeQo=
+# YAIO Infrastructure
+
+Playbooks, skills y documentación operacional del stack YAIO.
+
+## Estructura
+
+```
+skills/          → Skills para Claude Code (~/.claude/skills/)
+docs/            → Documentación de servicios y runbooks
+```
+
+## Servicios
+
+| Servicio | URL | Estado |
+|----------|-----|--------|
+| Coolify | https://coolify.yaiotech.com | production |
+| Nextcloud | https://cloud.yaiotech.com | production |
+| Authentik | https://auth.yaiotech.com | production |
+| Infisical | https://secrets.yaiotech.com | production |
+| OneDrive S3 | http://10.0.11.2:9000 | development |
+
+## Skills disponibles
+
+- `rclone-onedrive-s3` — Reconectar OneDrive y actualizar el servicio S3 en Coolify

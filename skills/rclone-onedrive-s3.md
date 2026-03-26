@@ -1,1 +1,17 @@
-IyBTa2lsbDogcmNsb25lLW9uZWRyaXZlLXMzCgpSZWNvbmVjdGEgT25lRHJpdmUgZW4gcmNsb25lIHkgYWN0dWFsaXphIGVsIHNlcnZpY2lvIFMzIGVuIENvb2xpZnkgKFlBSU8pLgoKQ3VhbmRvIGVsIHVzdWFyaW8gZGlnYSAicmVjb25lY3RhIG9uZWRyaXZlIiwgInJjbG9uZSBvbmVkcml2ZSIsICJlbCBzMyBkZSBvbmVkcml2ZSBlc3TDoSBjYcOtZG8iIG8gc2ltaWxhciwgc2VndWlyIGVzdG9zIHBhc29zOgoKMS4gVmVyaWZpY2FyIGVzdGFkbzogYGNvb2xpZnkgc2VydmljZSBnZXQgbXNrY2NnODRvd3Mwb2Nnd3c0YzA0NGtnYAoyLiBMYW56YXIgYXV0aG9yaXplIGVuIGJhY2tncm91bmQgY29uIGAtLWF1dGgtbm8tb3Blbi1icm93c2VyYCwgZ3VhcmRhciBvdXRwdXQgZW4gYC90bXAvcmNsb25lX3Rva2VuLnR4dGAKMy4gRGFyIGFsIHVzdWFyaW8gZWwgbGluayBwYXJhIGFicmlyIGVuIGJyb3dzZXIgKG5lY2VzaXRhIFNTSCB0dW5uZWwgYWwgcHVlcnRvIDUzNjgyKQo0LiBFc3BlcmFyIGNvbmZpcm1hY2nDs24gIlN1Y2Nlc3MhIiwgbGVlciBlbCB0b2tlbiBkZSBgL3RtcC9yY2xvbmVfdG9rZW4udHh0YAo1LiBPYnRlbmVyIGRyaXZlX2lkIHZpYSBHcmFwaCBBUEkgY29uIGVsIG51ZXZvIGFjY2Vzc190b2tlbgo2LiBBY3R1YWxpemFyIGAvaG9tZS9mcmFuY2lzY28vLmNvbmZpZy9yY2xvbmUvcmNsb25lLmNvbmZgICh0b2tlbiArIGRyaXZlX2lkKQo3LiBBY3R1YWxpemFyIGVsIHNlcnZpY2lvIGVuIENvb2xpZnkgdmlhIGBtY3BfX2Nvb2xpZnlfX3NlcnZpY2VgICh1dWlkOiBtc2tjY2c4NG93czBvY2d3dzRjMDQ0a2cpCjguIGBjb29saWZ5IHNlcnZpY2UgcmVzdGFydCBtc2tjY2c4NG93czBvY2d3dzRjMDQ0a2dgCjkuIFZlcmlmaWNhciBjb24gYHJjbG9uZSBsc2Qgb25lZHJpdmU6YCB5IGBjb29saWZ5IHNlcnZpY2UgZ2V0YAoKVmVyIGRvY3VtZW50YWNpw7NuIGNvbXBsZXRhIGVuOiBodHRwczovL2dpdGh1Yi5jb20vRlZTQi95YWlvLWluZnJhL2Jsb2IvbWFpbi9za2lsbHMvcmNsb25lLW9uZWRyaXZlLXMzLm1kCg==
+# Skill: rclone-onedrive-s3
+
+Reconecta OneDrive en rclone y actualiza el servicio S3 en Coolify (YAIO).
+
+Cuando el usuario diga "reconecta onedrive", "rclone onedrive", "el s3 de onedrive está caído" o similar, seguir estos pasos:
+
+1. Verificar estado: `coolify service get mskccg84ows0ocgww4c044kg`
+2. Lanzar authorize en background con `--auth-no-open-browser`, guardar output en `/tmp/rclone_token.txt`
+3. Dar al usuario el link para abrir en browser (necesita SSH tunnel al puerto 53682)
+4. Esperar confirmación "Success!", leer el token de `/tmp/rclone_token.txt`
+5. Obtener drive_id via Graph API con el nuevo access_token
+6. Actualizar `/home/francisco/.config/rclone/rclone.conf` (token + drive_id)
+7. Actualizar el servicio en Coolify via `mcp__coolify__service` (uuid: mskccg84ows0ocgww4c044kg)
+8. `coolify service restart mskccg84ows0ocgww4c044kg`
+9. Verificar con `rclone lsd onedrive:` y `coolify service get`
+
+Ver documentación completa en: https://github.com/FVSB/yaio-infra/blob/main/skills/rclone-onedrive-s3.md

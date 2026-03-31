@@ -22,16 +22,36 @@ export COOLIFY_URL="${COOLIFY_URL:-http://51.77.144.18:8000}"
 export COOLIFY_TOKEN="..."   # token desde Coolify → Security → API tokens
 ```
 
-### Rotación de token (si se filtró o por política)
+### Rotación de token (coolify-cli + UI)
 
-1. En Coolify: **Security** → **API tokens** → **Create New Token** (permisos según necesidad; muchas operaciones requieren `*`) → copiar el valor **una sola vez**.
-2. En la misma lista, **eliminar o revocar** el token antiguo.
-3. Actualizar el secreto en:
-   - **MCP Claude**: `~/.claude.json` → en `projects` la ruta de tu workspace → `mcpServers.coolify.env` → `COOLIFY_ACCESS_TOKEN` (nuevo) y `COOLIFY_BASE_URL` = `http://51.77.144.18:8000`.
-   - **Shell / Terraform**: `export COOLIFY_TOKEN=...`, `TF_VAR_coolify_token`, o `terraform.tfvars` (no commitear).
-4. Reiniciar el cliente (Claude Code) para que el servidor MCP recargue variables.
+El **coolify-cli** no puede crear ni revocar tokens en el servidor; solo guarda el token en tu máquina (`~/.coolify/…`). Crear y borrar el token sigue siendo en **Coolify → Security → API tokens**.
 
-> Los tokens de API de Coolify **solo se crean en la UI**; no hay endpoint público documentado para rotarlos por API.
+**1. UI (obligatorio para crear/revocar):** crea un token nuevo (permisos `*` si usas MCP/admin), copia el valor una vez, y **revoca el token viejo**.
+
+**2. CLI — aplicar el token nuevo al contexto por defecto** (`localhost` apunta a `http://51.77.144.18:8000`):
+
+```bash
+# Opción A — un solo comando (URL + token)
+coolify context update localhost \
+  --url "http://51.77.144.18:8000" \
+  --token "1|TU_TOKEN_NUEVO"
+
+# Opción B — solo cambiar token si la URL ya está bien
+coolify context set-token localhost "1|TU_TOKEN_NUEVO"
+
+coolify context verify
+```
+
+**3. Script incluido en este skill** (mismo efecto que la opción A):
+
+```bash
+~/.claude/skills/coolify/rotate-coolify-token.sh '1|TU_TOKEN_NUEVO'
+# o: COOLIFY_NEW_TOKEN='1|...' ~/.claude/skills/coolify/rotate-coolify-token.sh
+```
+
+**4. MCP / otros:** pega el mismo token en `~/.claude.json` → `mcpServers.coolify.env.COOLIFY_ACCESS_TOKEN`, y en `TF_VAR_coolify_token` / `.env` si aplica. Reinicia Claude Code.
+
+**5. Comprobar:** `coolify project list` o `coolify context verify`.
 
 ## Environments (YAIO project)
 

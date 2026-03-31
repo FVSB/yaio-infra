@@ -169,8 +169,8 @@ coolify service restart <uuid>
 coolify app logs <uuid>
 
 # No hay comando CLI para logs de servicios — usar la API:
-curl -s "http://localhost:8000/api/v1/services/<uuid>" \
-  -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689"
+curl -s "${COOLIFY_URL}/api/v1/services/<uuid>" \
+  -H "Authorization: Bearer ${COOLIFY_TOKEN}"
 ```
 
 Los logs centralizados se visualizan en **Grafana + Loki** (ver sección Monitoring).

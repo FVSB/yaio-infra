@@ -15,11 +15,11 @@ version: 2.1.0
 - **Server UUID**: `rc0s40kscg4kckoo4owwco08`
 - **Server IP**: `51.77.144.18`
 
-En ejemplos de shell, usar:
+En ejemplos de shell, definir antes de los `curl`:
 
 ```bash
 export COOLIFY_URL="${COOLIFY_URL:-http://51.77.144.18:8000}"
-export COOLIFY_TOKEN   # ya definido en tu entorno
+export COOLIFY_TOKEN="..."   # token desde Coolify → Security → API tokens
 ```
 
 ## Environments (YAIO project)

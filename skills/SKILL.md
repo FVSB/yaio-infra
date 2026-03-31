@@ -251,8 +251,8 @@ coolify service create --list-types
 ```bash
 COMPOSE_B64=$(cat docker-compose.yml | base64 -w 0)
 
-curl -s -X POST "http://localhost:8000/api/v1/services" \
-  -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689" \
+curl -s -X POST "${COOLIFY_URL}/api/v1/services" \
+  -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
   -H "Content-Type: application/json" \
   -d "{
     \"name\": \"nombre-servicio\",
@@ -264,8 +264,8 @@ curl -s -X POST "http://localhost:8000/api/v1/services" \
   }"
 
 # Luego iniciar:
-curl -s -X GET "http://localhost:8000/api/v1/services/<uuid>/start" \
-  -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689"
+curl -s -X GET "${COOLIFY_URL}/api/v1/services/<uuid>/start" \
+  -H "Authorization: Bearer ${COOLIFY_TOKEN}"
 ```
 
 ### Crear environment nuevo (no hay CLI — usar API)

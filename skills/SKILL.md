@@ -94,8 +94,8 @@ Parsear el `.env` y cargarlo variable a variable via API (cuando `env sync` no e
 
 ```bash
 # Para cada línea KEY=VALUE del .env:
-curl -s -X POST "http://localhost:8000/api/v1/applications/<app-uuid>/envs" \
-  -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689" \
+curl -s -X POST "${COOLIFY_URL}/api/v1/applications/<app-uuid>/envs" \
+  -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
   -H "Content-Type: application/json" \
   -d '{"key": "NOMBRE_VAR", "value": "valor", "is_secret": true}'
 ```
@@ -105,8 +105,8 @@ Script para cargar todo el .env de una vez vía API:
 ```bash
 while IFS='=' read -r key value; do
   [[ "$key" =~ ^#.*$ || -z "$key" ]] && continue
-  curl -s -X POST "http://localhost:8000/api/v1/applications/<app-uuid>/envs" \
-    -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689" \
+  curl -s -X POST "${COOLIFY_URL}/api/v1/applications/<app-uuid>/envs" \
+    -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
     -H "Content-Type: application/json" \
     -d "{\"key\": \"$key\", \"value\": \"$value\", \"is_secret\": true}"
 done < .env

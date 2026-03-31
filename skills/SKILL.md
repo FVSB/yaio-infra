@@ -27,7 +27,7 @@ export COOLIFY_TOKEN="..."   # token desde Coolify → Security → API tokens
 1. En Coolify: **Security** → **API tokens** → **Create New Token** (permisos según necesidad; muchas operaciones requieren `*`) → copiar el valor **una sola vez**.
 2. En la misma lista, **eliminar o revocar** el token antiguo.
 3. Actualizar el secreto en:
-   - **MCP Claude**: `~/.claude.json` → `projects["/home/francisco"].mcpServers.coolify.env` → `COOLIFY_ACCESS_TOKEN` y `COOLIFY_BASE_URL` (`http://51.77.144.18:8000`).
+   - **MCP Claude**: `~/.claude.json` → en `projects` la ruta de tu workspace → `mcpServers.coolify.env` → `COOLIFY_ACCESS_TOKEN` (nuevo) y `COOLIFY_BASE_URL` = `http://51.77.144.18:8000`.
    - **Shell / Terraform**: `export COOLIFY_TOKEN=...`, `TF_VAR_coolify_token`, o `terraform.tfvars` (no commitear).
 4. Reiniciar el cliente (Claude Code) para que el servidor MCP recargue variables.
 

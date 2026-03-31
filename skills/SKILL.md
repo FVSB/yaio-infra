@@ -1,7 +1,7 @@
 ---
 name: coolify
 description: Use this skill when the user asks to deploy, manage, or interact with services in Coolify (self-hosted). Triggers on: "deploy X in coolify", "add a service to coolify", "manage coolify", "coolify API", "start/stop/restart coolify service", or any infrastructure/service deployment request.
-version: 2.1.1
+version: 2.1.2
 ---
 
 # Coolify Management Skill

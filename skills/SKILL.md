@@ -32,8 +32,8 @@ export COOLIFY_TOKEN="..."   # token desde Coolify → Security → API tokens
 
 ## Naming Conventions
 
-- Apps en **development** deben usar el prefijo `dev.` en el dominio. Ejemplo: `dev.miapp.51.77.144.18.sslip.io`
-- Apps en **production** usan el dominio directo: `miapp.51.77.144.18.sslip.io`
+- Apps en **development** deben usar el prefijo `dev.` en el dominio. Ejemplo: `dev.miapp.51.77.144.18.sslip.io` o `dev.miapp.yaiotech.com` (wildcard DNS en Terraform: `~/infra-yaio/dns.tf`).
+- Apps en **production** usan el dominio directo: `miapp.51.77.144.18.sslip.io` o `miapp.yaiotech.com`.
 
 ## GitHub Apps
 

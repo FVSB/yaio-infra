@@ -271,10 +271,30 @@ curl -s -X GET "${COOLIFY_URL}/api/v1/services/<uuid>/start" \
 ### Crear environment nuevo (no hay CLI — usar API)
 
 ```bash
-curl -s -X POST "http://localhost:8000/api/v1/projects/dg4440k0kg0k404wswc0k8g0/environments" \
-  -H "Authorization: Bearer 1|BScQL6BKBJrC9PP8OsTrSgzFki5ubYMZuh2E4T6E4517d689" \
+curl -s -X POST "${COOLIFY_URL}/api/v1/projects/dg4440k0kg0k404wswc0k8g0/environments" \
+  -H "Authorization: Bearer ${COOLIFY_TOKEN}" \
   -H "Content-Type: application/json" \
   -d '{"name": "nombre-environment"}'
+```
+
+---
+
+## Terraform (`infra-yaio`)
+
+Código en **`~/infra-yaio`** (DNS Namecheap + Coolify).
+
+- **Provider**: [`SierraJC/coolify`](https://registry.terraform.io/providers/SierraJC/coolify) versión **`~> 0.10`** (p. ej. **0.10.2**). El bloque del provider usa **`endpoint`**, no `url` (equivale a la base HTTP del panel, p. ej. `http://51.77.144.18:8000`).
+- **Proyecto**: `resource "coolify_project" "yaio"` con import del UUID existente.
+- **Aplicaciones y servicios one-click ya creados en Coolify**: el proveedor **no** expone `resource "coolify_application"`; se referencian con **`data "coolify_application"`** y **`data "coolify_service"`** por **UUID** (solo lectura). Para **nuevas** apps/servicios, crear en UI, CLI o API y luego añadir el data source o documentar el UUID.
+- **Servicio vía Terraform como recurso**: `resource "coolify_service"` requiere **`compose`** (YAML de Docker Compose), no tipos de catálogo como `type = "nextcloud"`.
+- Variables típicas: `coolify_url`, `coolify_token` (sensible); ver `variables.tf` y `providers.tf`.
+
+```bash
+cd ~/infra-yaio
+export TF_VAR_coolify_token="$COOLIFY_TOKEN"
+terraform init -upgrade
+terraform validate
+terraform plan
 ```
 
 ---

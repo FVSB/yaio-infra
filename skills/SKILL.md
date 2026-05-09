@@ -117,7 +117,14 @@ rm /tmp/.env-tmp
 
 # 3. Desplegar
 coolify deploy uuid <app-uuid>
+
+# 4. Si el usuario quiso Authentik (pregunta 7) → aplicar middleware automáticamente
+#    IMPORTANTE: ejecutar DESPUÉS del primer deploy exitoso (el app debe estar running)
+export COOLIFY_TOKEN="..."
+~/.claude/skills/coolify/add-authentik-middleware.sh <app-uuid>
 ```
+
+> **Regla:** el paso 4 solo se ejecuta si la respuesta a la pregunta 7 fue "sí". No preguntar de nuevo — ejecutarlo directamente como parte del flujo.
 
 ### Si el usuario pega el contenido del .env
 

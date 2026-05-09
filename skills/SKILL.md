@@ -330,6 +330,61 @@ terraform plan
 
 ---
 
+## Autenticación con Authentik (ForwardAuth por app)
+
+Protege cualquier app en Coolify usando Authentik como proxy de autenticación vía Traefik ForwardAuth. Cualquier usuario autenticado en Authentik puede acceder (modo domain-level).
+
+### Cómo funciona
+
+Traefik intercepta cada request al app y lo valida contra el outpost de Authentik (`/outpost.goauthentik.io/auth/traefik`). Si el usuario no tiene sesión, lo redirige al login de `authentik.yaiotech.com`.
+
+### Script rápido (recomendado)
+
+```bash
+export COOLIFY_TOKEN="..."   # token de Coolify
+~/.claude/skills/coolify/add-authentik-middleware.sh <app-uuid>
+```
+
+El script:
+1. Lee los `custom_labels` actuales de la app vía API
+2. Añade `authentik` a los middlewares del router HTTPS
+3. Agrega las 3 líneas de definición del middleware ForwardAuth
+4. Sube los labels actualizados (base64) y reinicia la app
+
+### Procedimiento manual (cuando se configura via MCP)
+
+**Paso 1** — Obtener los `custom_labels` actuales del app (base64), decodificar y modificar:
+
+```
+# Añadir al router HTTPS (cambiar "middlewares=gzip" → "middlewares=gzip,authentik"):
+traefik.http.routers.https-0-<APP_UUID>.middlewares=gzip,authentik
+
+# Añadir estas 3 líneas de definición:
+traefik.http.middlewares.authentik.forwardauth.address=https://authentik.yaiotech.com/outpost.goauthentik.io/auth/traefik
+traefik.http.middlewares.authentik.forwardauth.trustForwardHeader=true
+traefik.http.middlewares.authentik.forwardauth.authResponseHeaders=X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid,X-authentik-jwt,X-authentik-meta-jwks,X-authentik-meta-outpost,X-authentik-meta-provider,X-authentik-meta-app,X-authentik-meta-version
+```
+
+**Paso 2** — Recodificar a base64 y llamar a `mcp__coolify__application` con `action=update`, `uuid=<app-uuid>`, `custom_labels=<base64>`.
+
+**Paso 3** — Reiniciar la app con `mcp__coolify__control` (`action=restart`).
+
+### Verificación
+
+```bash
+curl -Is https://<dominio> | grep -i location
+# Debe redirigir a: https://authentik.yaiotech.com/...
+```
+
+### Notas importantes
+
+- El nombre del router HTTPS en Coolify sigue el patrón `https-0-<app-uuid>` — derivar del UUID de la app.
+- Los `custom_labels` en la API deben enviarse **codificados en base64** (`base64 -w 0`).
+- Si Coolify regenera los labels en un redeploy, el middleware puede perderse — volver a ejecutar el script.
+- **No aplicar** a Authentik mismo (loop) ni a apps públicas que no requieran autenticación.
+
+---
+
 ## Hooks Configurados
 
 Los siguientes hooks están activos globalmente en `~/.claude/settings.json`:

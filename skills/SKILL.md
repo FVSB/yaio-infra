@@ -86,7 +86,7 @@ Cuando el usuario quiera subir un proyecto nuevo, seguir este flujo **antes de e
 4. Puerto que expone el contenedor (revisar Dockerfile si no lo saben)
 5. Environment: production / development
 6. ¿Tiene archivo .env? → si sí, pedirlo o pedir que lo pegue
-7. ¿Quiere conectar Authentik (SSO)? → si sí, crear Application en Authentik
+7. ¿Quiere proteger el app con Authentik (SSO)? → si sí, ejecutar add-authentik-middleware.sh tras el primer deploy
 8. ¿Los secretos van a Infisical? → si sí, preguntar nombre del proyecto en Infisical
 ```
 
